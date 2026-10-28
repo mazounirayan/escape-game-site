@@ -26,6 +26,9 @@ jobs:
       - run: npm run build --workspace vitrine -- --base=/escape-game-site/
         env:
           VITE_STATIC_DEMO: '1'
+      - run: npm run build --workspace admin -- --base=/escape-game-site/admin/ --outDir ../vitrine/dist/admin --emptyOutDir
+        env:
+          VITE_STATIC_DEMO: '1'
       - uses: actions/upload-pages-artifact@v3
         with:
           path: vitrine/dist

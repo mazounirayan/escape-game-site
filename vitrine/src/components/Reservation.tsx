@@ -43,12 +43,12 @@ export default function BookingForm() {
       const reservation: Reservation = await response.json();
       setReservations([...freshReservations, reservation]);
       form.reset(); setTime('');
-      setNotice(STATIC_DEMO ? 'Demande enregistrée dans la démo. Les places restantes ont été mises à jour.' : 'Demande enregistrée. Votre réservation est en attente de confirmation dans l’espace de gestion.');
+      setNotice(STATIC_DEMO ? 'Demande enregistrée. Vous pouvez la confirmer dans l’espace de gestion de démo.' : 'Demande enregistrée. Votre réservation est en attente de confirmation dans l’espace de gestion.');
     } catch (error) { setNotice(error instanceof Error ? error.message : 'Connexion interrompue. Vérifiez votre réservation avant de réessayer.'); }
     finally { setBusy(false); }
   };
   return <div className="booking-band"><section id="Booking" className="booking section-shell">
-    <div><h2>Choisissez votre prochaine évasion.</h2><p>Une session, une équipe, un mystère à résoudre. Les sessions et les places restantes proviennent du calendrier de démonstration : choisissez une session pour voir ses horaires.</p><p className="demo-note">{STATIC_DEMO ? 'Démo en ligne : votre demande reste dans ce navigateur et disparaît au rechargement. Aucun paiement ni e-mail n’est envoyé.' : 'Démo locale. Aucun paiement ni e-mail de confirmation n’est envoyé.'}</p></div>
+    <div><h2>Choisissez votre prochaine évasion.</h2><p>Une session, une équipe, un mystère à résoudre. Les sessions et les places restantes proviennent du calendrier de démonstration : choisissez une session pour voir ses horaires.</p><p className="demo-note">{STATIC_DEMO ? 'Démo en ligne : les données restent dans votre navigateur. Votre demande apparaît dans l’espace de gestion de démo (lien en bas de page). Aucun paiement ni e-mail n’est envoyé.' : 'Démo locale. Aucun paiement ni e-mail de confirmation n’est envoyé.'}</p></div>
     <form onSubmit={submit}>
       <div className="field"><label htmlFor="session">Scénario et date</label><select id="session" value={sessionId} onChange={event => { setSessionId(event.target.value); setTime(''); }} required disabled={!ready || busy}><option value="">Choisir une session</option>{sessions.map(item => <option key={item.id} value={item.id}>{item.theme} · {new Date(item.date).toLocaleDateString('fr-FR')} · {item.price} €/personne</option>)}</select></div>
       {ready && sessions.length === 0 && <p>Aucune session à venir. Ajoutez-en une dans l’espace de gestion.</p>}

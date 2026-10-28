@@ -8,7 +8,7 @@ export default function Contact() {
     try {
       const response = await api('/contacts', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.fromEntries(data)) });
       if (!response.ok) throw new Error();
-      form.reset(); setNotice(STATIC_DEMO ? 'Message reçu par la démo, sans être envoyé ni conservé.' : 'Message enregistré dans la démo. Aucun e-mail n’a été envoyé.');
+      form.reset(); setNotice(STATIC_DEMO ? 'Message enregistré dans votre navigateur. Aucun e-mail n’a été envoyé.' : 'Message enregistré dans la démo. Aucun e-mail n’a été envoyé.');
     } catch { setNotice('Message non enregistré. Vérifiez que l’API est démarrée puis réessayez.'); }
     finally { setBusy(false); }
   };

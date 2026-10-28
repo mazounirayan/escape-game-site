@@ -8,7 +8,11 @@ Ce projet est une démonstration open source sous [Apache 2.0](LICENSE). L’API
 
 Captures pleine page : [desktop](docs/vitrine-desktop.png) · [mobile](docs/vitrine-mobile.png).
 
-**Démo en ligne de la vitrine :** https://mazounirayan.github.io/escape-game-site/ — version statique, sans serveur : les sessions sont fictives et une demande de réservation reste dans le navigateur jusqu’au rechargement. L’espace de gestion se lance en local (ci-dessous).
+**Démo en ligne**, version statique sans serveur :
+- Vitrine : https://mazounirayan.github.io/escape-game-site/
+- Espace de gestion : https://mazounirayan.github.io/escape-game-site/admin/ (compte fictif ci-dessous)
+
+Les deux pages partagent des données fictives conservées dans votre navigateur : une demande faite sur la vitrine peut être confirmée dans la gestion. Rien n’est envoyé à un serveur.
 
 ## Démarrer
 
