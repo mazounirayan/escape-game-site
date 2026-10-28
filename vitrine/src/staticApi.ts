@@ -21,10 +21,10 @@ function seed(): Db {
 }
 
 let memory: Db | null = null;
+// Read storage on every request: another tab (vitrine or admin) may have written since.
 function load(): Db {
-  if (memory) return memory;
   try { const saved = localStorage.getItem(KEY); if (saved) return (memory = JSON.parse(saved) as Db); } catch { /* storage unavailable: keep the demo in memory */ }
-  return (memory = seed());
+  return memory ?? (memory = seed());
 }
 function save(db: Db) {
   memory = db;
@@ -62,8 +62,10 @@ function answer(request: string, init?: RequestInit): Response {
   return Response.json(item);
 }
 
-export function installStaticApi() {
+export function installStaticApi({ reloadOnExternalChange = false } = {}) {
   if (!STATIC_DEMO) return;
+  // Lists load once on mount; reloading shows a booking made in another tab right away.
+  if (reloadOnExternalChange) window.addEventListener('storage', event => { if (event.key === KEY) location.reload(); });
   const realFetch = window.fetch.bind(window);
   window.fetch = async (input, init) => {
     const request = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
