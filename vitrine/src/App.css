@@ -129,6 +129,7 @@ input[type=number]{max-width:9rem;font-variant-numeric:tabular-nums}
 .booking-total strong{font-family:var(--font-display);font-size:1.875rem;font-weight:500;color:var(--accent)}
 .form-hint{font-size:.9375rem;color:var(--muted);margin-top:-8px}
 .form-notice{line-height:1.6;font-size:.9375rem;padding:12px 14px;background:var(--bg);border-radius:var(--radius);color:var(--ink)}
+.form-notice a{color:var(--accent);text-underline-offset:4px}
 .text-button{background:none;border:0;color:var(--accent);padding:10px;text-decoration:underline;text-underline-offset:4px;justify-self:start}
 .text-button:hover{color:var(--accent-hover)}
 

@@ -1,5 +1,6 @@
 import { useEffect, useState, FormEvent } from 'react';
 import { api, STATIC_DEMO } from '../api';
+import { storageAvailable } from '../staticApi';
 import { availableSlots, localDay, reservationPayload, Session, Reservation } from '../booking';
 export default function BookingForm() {
   const [sessions, setSessions] = useState<Session[]>([]);
@@ -43,7 +44,7 @@ export default function BookingForm() {
       const reservation: Reservation = await response.json();
       setReservations([...freshReservations, reservation]);
       form.reset(); setTime('');
-      setNotice(STATIC_DEMO ? 'Demande enregistrée. Vous pouvez la confirmer dans l’espace de gestion de démo.' : 'Demande enregistrée. Votre réservation est en attente de confirmation dans l’espace de gestion.');
+      setNotice(STATIC_DEMO ? storageAvailable() ? 'Demande enregistrée dans ce navigateur.' : 'Demande enregistrée, mais votre navigateur bloque le stockage local : elle n’apparaîtra pas dans l’espace de gestion.' : 'Demande enregistrée. Votre réservation est en attente de confirmation dans l’espace de gestion.');
     } catch (error) { setNotice(error instanceof Error ? error.message : 'Connexion interrompue. Vérifiez votre réservation avant de réessayer.'); }
     finally { setBusy(false); }
   };
@@ -58,7 +59,7 @@ export default function BookingForm() {
       {session && slot && <p className="booking-total">Total indicatif <strong>{new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(Number(session.price) * people)}</strong></p>}
       {ready && !slot && !busy && <p className="form-hint" id="submit-hint">{session ? 'Choisissez un horaire pour continuer.' : 'Choisissez une session pour continuer.'}</p>}
       <button className="primary-button" disabled={!slot || busy || !ready} aria-describedby={ready && !slot ? 'submit-hint' : undefined}>{busy ? 'Enregistrement…' : 'Demander une réservation'}</button>
-      {notice && <p className="form-notice" role="status">{notice}</p>}{!ready && <button className="text-button" type="button" onClick={() => void load()}>Recharger le calendrier</button>}
+      {notice && <p className="form-notice" role="status">{notice}{STATIC_DEMO && notice.startsWith('Demande enregistrée') && <> <a href={`${import.meta.env.BASE_URL}admin/#/Reservation`}>Voir la demande dans l’espace de gestion</a></>}</p>}{!ready && <button className="text-button" type="button" onClick={() => void load()}>Recharger le calendrier</button>}
     </form>
   </section></div>;
 }

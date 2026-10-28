@@ -33,6 +33,17 @@ function save(db: Db) {
 
 export function resetStaticDemo() { save(seed()); }
 
+// Without localStorage (blocked by the browser), the vitrine and the admin cannot share bookings.
+export function storageAvailable(): boolean {
+  try { localStorage.setItem(`${KEY}-probe`, '1'); localStorage.removeItem(`${KEY}-probe`); return true; } catch { return false; }
+}
+
+export function demoStatus(): string {
+  if (!storageAvailable()) return 'Démo en ligne · stockage bloqué par le navigateur : les réservations de la vitrine ne peuvent pas apparaître ici';
+  const count = load().reservations.length;
+  return `Démo en ligne · ${count} réservation${count > 1 ? 's' : ''} enregistrée${count > 1 ? 's' : ''} dans ce navigateur`;
+}
+
 function answer(request: string, init?: RequestInit): Response {
   const url = new URL(request, location.origin);
   const [collection, id] = url.pathname.replace(/^\/api\/?/, '').split('/');
