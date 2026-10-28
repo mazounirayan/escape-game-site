@@ -1,0 +1,101 @@
+{
+  "employees": [
+    {
+      "id": "demo-admin",
+      "name": "Administration démo",
+      "email": "admin@example.com",
+      "password": "demo-password",
+      "role": "admin"
+    }
+  ],
+  "themes": [
+    {
+      "id": "1",
+      "name": "Asile",
+      "salle": 1,
+      "histoire": "Scénario de démonstration : Asile."
+    },
+    {
+      "id": "2",
+      "name": "Crypte",
+      "salle": 2,
+      "histoire": "Scénario de démonstration : Crypte."
+    },
+    {
+      "id": "3",
+      "name": "Laboratoire",
+      "salle": 3,
+      "histoire": "Scénario de démonstration : Laboratoire."
+    }
+  ],
+  "sessions": [
+    {
+      "id": "demo-1",
+      "themeId": "1",
+      "theme": "Asile",
+      "date": "2026-10-29T12:00:00",
+      "duration": 60,
+      "price": 25,
+      "minParticipants": 3,
+      "createdBy": "demo-admin",
+      "availableSlots": [
+        {
+          "time": "14:00",
+          "maxParticipants": 6,
+          "remainingPlaces": 6
+        },
+        {
+          "time": "18:00",
+          "maxParticipants": 6,
+          "remainingPlaces": 6
+        }
+      ]
+    },
+    {
+      "id": "demo-2",
+      "themeId": "2",
+      "theme": "Crypte",
+      "date": "2026-10-29T12:00:00",
+      "duration": 60,
+      "price": 25,
+      "minParticipants": 3,
+      "createdBy": "demo-admin",
+      "availableSlots": [
+        {
+          "time": "14:00",
+          "maxParticipants": 6,
+          "remainingPlaces": 6
+        },
+        {
+          "time": "18:00",
+          "maxParticipants": 6,
+          "remainingPlaces": 6
+        }
+      ]
+    },
+    {
+      "id": "demo-3",
+      "themeId": "3",
+      "theme": "Laboratoire",
+      "date": "2026-10-29T12:00:00",
+      "duration": 60,
+      "price": 25,
+      "minParticipants": 3,
+      "createdBy": "demo-admin",
+      "availableSlots": [
+        {
+          "time": "14:00",
+          "maxParticipants": 6,
+          "remainingPlaces": 6
+        },
+        {
+          "time": "18:00",
+          "maxParticipants": 6,
+          "remainingPlaces": 6
+        }
+      ]
+    }
+  ],
+  "reservations": [],
+  "contacts": []
+}

@@ -1,0 +1,27 @@
+{
+  "name": "escape-game-suite",
+  "version": "1.0.0",
+  "description": "Suite logicielle complète pour Escape Games & Centres de Loisirs (Vitrine Client + Back-Office Gérant)",
+  "private": true,
+  "scripts": {
+    "dev:vitrine": "npm run start --workspace vitrine",
+    "dev:admin": "npm run start --workspace admin",
+    "dev:api": "npm run server --workspace admin",
+    "build:vitrine": "npm run build --workspace vitrine",
+    "build:admin": "npm run build --workspace admin",
+    "build": "npm run build:vitrine && npm run build:admin",
+    "test": "tsx --test tests/booking.test.ts",
+    "demo:reset": "node scripts/reset-demo.mjs"
+  },
+  "workspaces": [
+    "admin",
+    "vitrine"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.0"
+  },
+  "license": "Apache-2.0"
+}
